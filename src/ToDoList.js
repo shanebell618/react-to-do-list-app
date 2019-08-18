@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ToDo from './ToDo.js';
 import NewToDoForm from './NewToDoForm';
+import './ToDoList.css';
 
 class ToDoList extends Component {
   constructor(props) {
@@ -58,13 +59,19 @@ class ToDoList extends Component {
                   handleCompleted = {this.completed}
                 />
     });
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    today = mm + '/' + dd + '/' + yyyy;
     return (
-        <div>
-            <h1>Notes</h1>
-            <NewToDoForm createToDo={this.createToDo} />
+        <div className="TodoList">
+            <h1>My ToDos <span>{today}</span></h1>
+            
             <ul>
                 {todos}
             </ul>
+            <NewToDoForm createToDo={this.createToDo} />
         </div>
     );
   }
